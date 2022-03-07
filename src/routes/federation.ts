@@ -20,6 +20,8 @@ router.get('/:federation/members', async (req, res) => {
 
 router.post('/:federation/hook', async (req, res) => {
 
+    console.log(req.body)
+    console.log(req.headers)
     // validate request integrity
     if (!req.headers['X-Patreon-Signature']) return res.sendStatus(401);
     const signature = req.headers['X-Patreon-Signature'];
