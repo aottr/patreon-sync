@@ -23,8 +23,8 @@ router.post('/:federation/hook', async (req, res) => {
     console.log(req.body)
     console.log(req.headers)
     // validate request integrity
-    if (!req.headers['X-Patreon-Signature']) return res.sendStatus(401);
-    const signature = req.headers['X-Patreon-Signature'];
+    if (!req.headers['x-patreon-signature']) return res.sendStatus(401);
+    const signature = req.headers['x-patreon-signature'];
     if (signature instanceof Array) return res.sendStatus(401);
     if(!validateWebHook(req.body, signature)) return res.sendStatus(401);
 
