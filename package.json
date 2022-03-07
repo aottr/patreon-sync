@@ -1,0 +1,33 @@
+{
+  "name": "pawtreon",
+  "version": "1.0.0",
+  "description": "Patreon bridge",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "build": "tsc",
+    "lint": "eslint . --fix",
+    "start": "node dist/main.js",
+    "debug": "nodemon src/main.ts"
+  },
+  "author": "Alex Ottr <alex@ottr.one>",
+  "license": "MIT",
+  "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
+    "@types/express": "^4.17.13",
+    "@types/node": "^17.0.21",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "eslint": "^8.10.0",
+    "nodemon": "^2.0.15",
+    "typescript": "^4.6.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "express-validator": "^6.14.0",
+    "helmet": "^5.0.2",
+    "mongoose": "^6.2.4",
+    "nanoid": "^3.3.1"
+  }
+}
