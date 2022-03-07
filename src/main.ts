@@ -6,6 +6,8 @@ import { connect, ConnectOptions } from 'mongoose';
 const PORT = process.env.PORT || 5050;
 const app = express();
 
+import fedRouter from './routes/federation';
+
 app.use(helmet());
 app.use(express.json());
 
@@ -17,6 +19,8 @@ connect(
         useUnifiedTopology: true,
     } as ConnectOptions
 );
+
+app.use(fedRouter);
 
 app.listen(PORT, async () => {
     console.log(`⚡️ [server]: Server is running at https://localhost:${PORT}`);
