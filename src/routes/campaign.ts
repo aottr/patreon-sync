@@ -1,7 +1,9 @@
 import { Router } from 'express';
-import { body, check, validationResult } from 'express-validator';
 import { createHmac } from 'crypto';
 const router = Router();
+
+import { fetchBeans } from '../models/bean';
+import { update } from '../models/fedUser';
 
 const CAMPAIGN_WEBHOOK_KEY = process.env.SECRET || '';
 
@@ -13,16 +15,25 @@ const validateWebHook = (message: string, signature: string) : boolean => {
     return signature === hmac;
 }
 
-router.get('/:federation/members', async (req, res) => {
+router.head('/', async (req, res) => {
 
-    return res.status(200).json({});
+    await fetchBeans();
+    return res.sendStatus(200);
 });
 
-router.post('/:federation/hook', async (req, res) => {
+router.post('/', async (req, res) => {
+
+    await update();
+    return res.sendStatus(200);
+});
+
+router.post('/:campaign/hook', async (req, res) => {
 
     console.log(req.body)
     console.log(req.headers)
     // validate request integrity
+    // TODO exclude this call from bodyparser middleware
+
     if (!req.headers['x-patreon-signature']) return res.sendStatus(401);
     const signature = req.headers['x-patreon-signature'];
     if (signature instanceof Array) return res.sendStatus(401);
