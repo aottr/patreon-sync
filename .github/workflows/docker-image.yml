@@ -20,7 +20,9 @@ jobs:
 
     - name: Publish Docker image to Github Packages
       shell: bash
+      env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
       run: |
-        echo {{ secrets.GITHUB_TOKEN }} | docker login ghcr.io --username alexottr --password-stdin
+        echo $CR_TOKEN | docker login ghcr.io --username alexottr --password-stdin
         docker push ghcr.io/aottr/patreon-sync:latest
         docker logout
